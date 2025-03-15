@@ -1,0 +1,14 @@
+# aws cloudformation validate-template --template-body file://./cloudformation_template.yaml
+
+
+### YAML
+
+# aws cloudformation create-stack --stack-name iac-lab-cfn-yaml-david-vasconcelos --template-body file://./cloudformation_template.yaml
+
+# aws cloudformation delete-stack --stack-name iac-lab-cfn-yaml-david-vasconcelos 
+
+### JSON
+
+# aws cloudformation create-stack --stack-name iac-lab-cfn-yaml-david-vasconcelos --template-body file://./cloudformation_template.json
+
+# aws cloudformation delete-stack --stack-name iac-lab-cfn-yaml-david-vasconcelos 
