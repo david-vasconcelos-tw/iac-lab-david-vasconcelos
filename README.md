@@ -1,1 +1,1 @@
-# iac-lab-david-vasconcelos
+# Infra as Code - Lab Exercises
