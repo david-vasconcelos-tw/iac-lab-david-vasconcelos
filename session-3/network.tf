@@ -72,18 +72,18 @@ resource "aws_subnet" "subnet_public_6" {
   }
 }
 
-import {
-  to = aws_subnet.subnet_public_7
-  id = "subnet-0c58afe420b7abe5f"
+moved {
+  from = aws_subnet.subnet_public_7
+  to = aws_subnet.subnet_public_8
 }
 
-resource "aws_subnet" "subnet_public_7" {
+resource "aws_subnet" "subnet_public_8" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.subnet7_cidr
-  availability_zone = format("%sa", var.region)
+  cidr_block        = var.subnet8_cidr
+  availability_zone = format("%sb", var.region)
 
   tags = {
-    Name = format("%s-public-subnet-7", var.prefix)
+    Name = format("%s-public-subnet-8", var.prefix)
   }
 }
 
