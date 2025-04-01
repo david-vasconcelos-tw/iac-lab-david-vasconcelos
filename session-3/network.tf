@@ -72,6 +72,21 @@ resource "aws_subnet" "subnet_public_6" {
   }
 }
 
+import {
+  to = aws_subnet.subnet_public_7
+  id = "subnet-0c58afe420b7abe5f"
+}
+
+resource "aws_subnet" "subnet_public_7" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.subnet7_cidr
+  availability_zone = format("%sa", var.region)
+
+  tags = {
+    Name = format("%s-public-subnet-7", var.prefix)
+  }
+}
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 

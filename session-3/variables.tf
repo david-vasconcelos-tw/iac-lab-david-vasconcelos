@@ -43,3 +43,8 @@ variable "subnet6_cidr" {
   description = "Subnet 6 CIDR block"
   type        = string
 }
+
+variable "subnet7_cidr" {
+  description = "Subnet 7 CIDR block"
+  type        = string
+}
