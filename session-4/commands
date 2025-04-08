@@ -1,0 +1,13 @@
+# terraform console
+
+# min(1, 2, 3)
+
+# split("-", "a-b-c")
+
+# keys({ a = "1", b = "2"})
+
+# base64encode("bla")
+
+# basename("/path/to/file.txt")
+
+# cidrsubnet("192.168.0.0/24", 3 ,2)
