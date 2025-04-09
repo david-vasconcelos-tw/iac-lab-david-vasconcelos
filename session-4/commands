@@ -1,4 +1,4 @@
-# terraform console
+### terraform console
 
 # min(1, 2, 3)
 
@@ -11,3 +11,7 @@
 # basename("/path/to/file.txt")
 
 # cidrsubnet("192.168.0.0/24", 3 ,2)
+
+###
+
+# terraform graph -type=plan | dot -Tpng > graph.png
