@@ -4,7 +4,7 @@ resource "aws_lb" "lb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_sg.id]
   subnets = [
-    for s in aws_subnet.public_subnets : s.id
+    for subnet_id in module.vpc.public_subnets : subnet_id
   ]
 
   tags = {
@@ -15,7 +15,7 @@ resource "aws_lb" "lb" {
 resource "aws_lb_target_group" "tg" {
   port        = 8000
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = module.vpc.vpc_id
   target_type = "ip"
 
   health_check {
@@ -46,7 +46,7 @@ resource "aws_lb_listener" "lb_listener" {
 }
 
 resource "aws_security_group" "lb_sg" {
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = module.vpc.vpc_id
   description = "Allow HTTP inbound traffic"
 
   ingress {

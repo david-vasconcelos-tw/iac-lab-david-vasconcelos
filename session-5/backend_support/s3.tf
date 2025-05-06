@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "backend_bucket" {
-  bucket        = format("%s-tfstate", var.prefix)
-  
+  bucket = format("%s-tfstate", var.prefix)
+
   lifecycle {
     prevent_destroy = true
   }
