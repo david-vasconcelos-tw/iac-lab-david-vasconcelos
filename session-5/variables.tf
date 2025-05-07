@@ -1,6 +1,7 @@
 variable "prefix" {
   description = "Prefix for all resources"
   type        = string
+  default     = "david-vasconcelos-iac-lab"
 }
 
 variable "region" {
@@ -33,4 +34,15 @@ variable "number_of_private_subnets" {
 variable "number_of_secure_subnets" {
   description = "Number of secure subnets to create"
   type        = number
+}
+
+variable "db_name" {
+  description = "Database name"
+  type        = string
+  default     = "david_vasconcelos_iac_db"
+}
+
+variable "db_username" {
+  description = "Database username"
+  type        = string
 }
