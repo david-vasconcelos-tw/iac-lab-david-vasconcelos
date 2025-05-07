@@ -1,0 +1,13 @@
+### Postgres engine versions
+
+# aws rds describe-db-engine-versions --engine postgres --query "DBEngineVersions[].EngineVersion"
+
+### Docker
+
+# docker buildx build --load -t david-vasconcelos-iac-lab-crud-app .
+
+# docker tag david-vasconcelos-iac-lab-crud-app:latest 160071257600.dkr.ecr.us-east-2.amazonaws.com/david-vasconcelos-iac-lab-crud-app:latest
+
+# aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 160071257600.dkr.ecr.us-east-2.amazonaws.com
+
+# docker push 160071257600.dkr.ecr.us-east-2.amazonaws.com/david-vasconcelos-iac-lab-crud-app:latest
