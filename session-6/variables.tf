@@ -48,3 +48,9 @@ variable "db_username" {
   default     = "db_admin_user"
 }
 
+variable "container_cpu_architecture" {
+  description = "CPU architecture for the container"
+  type        = string
+  default     = "ARM64"
+}
+

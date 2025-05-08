@@ -58,3 +58,8 @@ variable "db_secret_key_id" {
   description = "ID of the database secret key"
   type        = string    
 }
+
+variable "container_cpu_architecture" {
+  description = "CPU architecture for the container"
+  type        = string
+}
