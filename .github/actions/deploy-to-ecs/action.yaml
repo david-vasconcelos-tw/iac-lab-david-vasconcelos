@@ -1,5 +1,24 @@
 name: Deploy to ECS
 description: Deploy to ECS
+inputs:
+  aws_region:
+    description: 'AWS region'
+    required: true
+  ecr_repository:
+    description: 'ECR repository name'
+    required: true
+  ecs_service:
+    description: 'ECS service name'
+    required: true
+  ecs_cluster:
+    description: 'ECS cluster name'
+    required: true
+  ecs_task_definition:
+    description: 'ECS task definition name'
+    required: true
+  iam_role:
+    description: 'IAM role to assume'
+    required: true
 
 runs:
   using: "composite"
@@ -11,8 +30,8 @@ runs:
       uses: aws-actions/configure-aws-credentials@2ec54502e3e7b5d9591613811da6daded35caa19
       with:
         role-session-name: GitHubActionsSession
-        role-to-assume: ${{ env.IAM_ROLE }}
-        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: ${{ inputs.IAM_ROLE }}
+        aws-region: ${{ inputs.AWS_REGION }}
 
     - name: Get aws identity
       shell: bash
@@ -21,7 +40,7 @@ runs:
 
     - name: Login to ECR      
       run: |
-        aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin 160071257600.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+        aws ecr get-login-password --region ${{ inputs.AWS_REGION }} | docker login --username AWS --password-stdin 160071257600.dkr.ecr.${{ inputs.AWS_REGION }}.amazonaws.com
       shell: bash
 
     - name: Login to Amazon ECR
@@ -31,7 +50,8 @@ runs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}    
+        ECR_REPOSITORY: ${{ inputs.ECR_REPOSITORY }}    
         IMAGE_TAG: ${{ github.sha }}      
       run: |
         echo "image -> $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
@@ -50,6 +70,8 @@ runs:
       shell: bash
 
     - name: Download task definition
+      env:
+        ECS_TASK_DEFINITION: ${{ inputs.ECS_TASK_DEFINITION }}
       run: |
         aws ecs describe-task-definition --task-definition $ECS_TASK_DEFINITION --query taskDefinition > ./task-definition.json
       shell: bash
@@ -66,6 +88,6 @@ runs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ${{ env.ECS_SERVICE }}
-        cluster: ${{ env.ECS_CLUSTER }}
+        service: ${{ inputs.ECS_SERVICE }}
+        cluster: ${{ inputs.ECS_CLUSTER }}
         wait-for-service-stability: true
