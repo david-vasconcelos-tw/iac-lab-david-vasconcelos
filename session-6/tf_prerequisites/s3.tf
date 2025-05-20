@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "backend_bucket" {
   }
 
   tags = {
-    Name = format("%s--tfstate", var.prefix)
+    Name = format("%s-tfstate", var.prefix)
   }
 }
 
